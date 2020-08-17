@@ -23,4 +23,4 @@ outputs:
     description: "We will inform you if we were able to reach your IoT device"
 runs:
   using: "node12"
-  main: "src/index.js"
+  main: "dist/action.js"
