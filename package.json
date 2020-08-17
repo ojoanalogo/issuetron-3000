@@ -1,0 +1,31 @@
+{
+  "name": "issuetron-3000",
+  "version": "1.0.0",
+  "description": "A GitHub action to turn on a light in the physical world when someone opens an issue on your repo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mxarc/issuetron-3000.git"
+  },
+  "keywords": [
+    "adafruit-iot",
+    "ESP8266",
+    "gh-action",
+    "github-actions",
+    "devto"
+  ],
+  "author": "mxarc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mxarc/issuetron-3000/issues"
+  },
+  "homepage": "https://github.com/mxarc/issuetron-3000#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^4.0.0",
+    "axios": "^0.19.2"
+  }
+}
