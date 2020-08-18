@@ -2,8 +2,8 @@ name: "Issuetron-3000"
 description: "A GitHub action to turn on a light in the physical world when someone opens an issue on your repo"
 inputs:
   time:
-    description: "How much time we will keep the light on (in seconds)"
-    required: true
+    description: "How much time will we keep the light on (in seconds)"
+    required: false
     default: "10"
   blink:
     description: "Would you like to enable blinking?"
@@ -11,13 +11,13 @@ inputs:
     default: "true"
   io_user:
     description: "Your Adafruit IO username"
-    required: false
+    required: true
   io_key:
     description: "Your Adafruit IO key"
-    required: false
+    required: true
   io_dashboard:
     description: "Your Adafruit dashboard name"
-    required: false
+    required: true
 outputs:
   success:
     description: "We will inform you if we were able to reach your IoT device"
