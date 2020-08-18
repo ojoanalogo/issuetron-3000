@@ -13,8 +13,10 @@ on:
 jobs:
   do_iot_thing:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: A job to turn on a light when someone opens an issue
     steps:
+      - name: Checkout # Checkout local action
+        uses: actions/checkout@v2
       - name: Send activation to esp device
         uses: ./ # Uses an action in the root directory
         id: activation
