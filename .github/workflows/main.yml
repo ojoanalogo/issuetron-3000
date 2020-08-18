@@ -16,7 +16,7 @@ jobs:
     name: A job to say hello
     steps:
       - name: Send activation to esp device
-        uses: mxarc/issuetron-3000
+        uses: ./ # Uses an action in the root directory
         id: activation
         with:
           time: "15"
