@@ -9,7 +9,7 @@ inputs:
     description: "Would you like to enable blinking?"
     required: false
     default: "true"
-  io_username:
+  io_user:
     description: "Your Adafruit IO username"
     required: false
   io_key:
