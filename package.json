@@ -27,7 +27,6 @@
   "dependencies": {
     "@actions/core": "^1.2.4",
     "@actions/github": "^4.0.0",
-    "axios": "^0.19.2",
     "mqtt": "^4.2.0"
   },
   "devDependencies": {
