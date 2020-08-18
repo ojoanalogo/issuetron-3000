@@ -2,10 +2,10 @@
   "name": "issuetron-3000",
   "version": "1.0.0",
   "description": "A GitHub action to turn on a light in the physical world when someone opens an issue on your repo",
-  "main": "dist/action.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "ncc build src/action.js"
+    "build": "ncc build src/index.js"
   },
   "repository": {
     "type": "git",

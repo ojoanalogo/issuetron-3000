@@ -1,0 +1,29 @@
+#########################################
+# This Workflow uses the issuetron-3000 action
+# and triggers it when and issue is opened
+#
+# author: @mxarc
+# play fair ✌
+#########################################
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  do_iot_thing:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+      - name: Send activation to esp device
+        uses: ./ # Uses an action in the root directory
+        id: activation
+        with:
+          time: "15"
+          blink: true
+          io_user: "${{ secrets.IO_USER }}"
+          io_key: "${{ secrets.IO_KEY }}"
+          io_dashboard: "issuetron"
+      # Use the output from the `hello` step
+      - name: Check if we succeeded to turn on the light
+        run: echo "The result of the action is ${{ steps.activation.outputs.success }}"

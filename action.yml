@@ -11,16 +11,16 @@ inputs:
     default: "true"
   io_username:
     description: "Your Adafruit IO username"
-    required: true
+    required: false
   io_key:
     description: "Your Adafruit IO key"
-    required: true
+    required: false
   io_dashboard:
     description: "Your Adafruit dashboard name"
-    required: true
+    required: false
 outputs:
   success:
     description: "We will inform you if we were able to reach your IoT device"
 runs:
   using: "node12"
-  main: "dist/action.js"
+  main: "dist/index.js"
