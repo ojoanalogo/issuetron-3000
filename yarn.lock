@@ -116,6 +116,13 @@
   resolved "https://registry.yarnpkg.com/@vercel/ncc/-/ncc-0.23.0.tgz#628f293f8ae2038d004378f864396ad8fc14380c"
   integrity sha512-Fcr1qlG9t54X4X9qbo/+jr1+t5Qc6H3TgIRBXmKkF/WDs6YFulAN6ilq2Ehx38RbgIOFxaZnjlAQ50GyexnMpQ==
 
+async-mqtt@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/async-mqtt/-/async-mqtt-2.6.1.tgz#7cca37b0c766e00d7b0b33c9eb236e216ed06248"
+  integrity sha512-EkXAwRzwMaPC6ji0EvNeM5OMe6VjMhEKVJJUN7gu/hGzkcDpZtaI34nUwdwCMbjQB3pnuSOHqQMFKsUpg+D8kA==
+  dependencies:
+    mqtt "^4.1.0"
+
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
@@ -453,7 +460,7 @@ mqtt-packet@^6.3.2:
     process-nextick-args "^2.0.0"
     safe-buffer "^5.1.2"
 
-mqtt@^4.2.0:
+mqtt@^4.1.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/mqtt/-/mqtt-4.2.0.tgz#74c65f8b926728485ebe1d55297a7ce08e47996f"
   integrity sha512-CGMLigAKCp0hknWPM15yuZRbVrfQjZCG9Wn3GXDEfY2chDmUi5GT3UQ3OhTtMi7fELYb2s4Q/QiWv+dECQ7ZQg==

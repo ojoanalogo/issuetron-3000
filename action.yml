@@ -15,9 +15,6 @@ inputs:
   io_key:
     description: "Your Adafruit IO key"
     required: true
-  io_dashboard:
-    description: "Your Adafruit dashboard name"
-    required: true
 outputs:
   success:
     description: "We will inform you if we were able to reach your IoT device"

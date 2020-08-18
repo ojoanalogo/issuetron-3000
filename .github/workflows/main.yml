@@ -25,7 +25,6 @@ jobs:
           blink: true
           io_user: "${{ secrets.IO_USER }}"
           io_key: "${{ secrets.IO_KEY }}"
-          io_dashboard: "issuetron"
       # Use the output from the `hello` step
       - name: Check if we succeeded to turn on the light
         run: echo "The result of the action is ${{ steps.activation.outputs.success }}"
