@@ -1,22 +1,31 @@
 /**
  * Add required imports
  */
-const core = require("@actions/core");
-const github = require("@actions/github");
-const MQTT = require("async-mqtt");
+const core = require('@actions/core');
+const github = require('@actions/github');
+const MQTT = require('async-mqtt');
 
 // GitHub Action inputs
-const io_user = core.getInput("io_user");
-const io_key = core.getInput("io_key");
-const blink = core.getInput("blink");
-const time = core.getInput("time");
+const io_user = core.getInput('io_user');
+const io_key = core.getInput('io_key');
+const blink = core.getInput('blink');
+const time = core.getInput('time');
 
-// Get issue context so we can display a message on a lcd screen
-const issueContext = github.getOctokit(
-  "https://github.com/mxarc/issuetron-3000"
-);
+// Required env vars
+const required_vars = ['IO_USER', 'IO_KEY', 'GITHUB_EVENT_PATH'];
 
-console.log(issueContext.issues.list({ per_page: 1, sort: "created" }));
+required_vars.forEach((env) => {
+  if (!process.env[env] || !process.env[env].length) {
+    console.error(
+      `Env var ${env} is not defined. Please check your repo secrets`
+    );
+    process.exit(1);
+  }
+});
+
+const eventContent = fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8');
+
+console.log(eventContent);
 /*const topic = `mxarc/feeds/issuetron/json`;
 
 (async () => {
