@@ -12,7 +12,7 @@ const blink = core.getInput('blink');
 const time = core.getInput('time');
 
 // Required env vars
-const required_vars = ['IO_USER', 'IO_KEY', 'GITHUB_EVENT_PATH'];
+const required_vars = ['io_user', 'io_key', 'GITHUB_EVENT_PATH'];
 
 required_vars.forEach((env) => {
   if (!process.env[env] || !process.env[env].length) {
