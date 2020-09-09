@@ -1,4 +1,7 @@
 name: 'Issuetron-3000'
+branding:
+  icon: 'alert-octagon'
+  color: 'yellow'
 description: 'A GitHub action to turn on a light in the physical world when someone opens an issue on your repo'
 inputs:
   time:
