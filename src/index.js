@@ -33,6 +33,9 @@ required_vars.forEach((val) => {
   }
 });
 
+const eventContent = fs.readFileSync(event_path, 'utf8');
+const eventObj = JSON.parse(eventContent);
+
 const isValidJson = (val) =>
   val instanceof Array || val instanceof Object ? true : false;
 
@@ -47,9 +50,6 @@ if (!fs.existsSync(event_path)) {
   core.error('GitHub event info is not on available');
   process.exit(1);
 }
-
-const eventContent = fs.readFileSync(event_path, 'utf8');
-const eventObj = JSON.parse(eventContent);
 
 // let the show begin
 (async () => {
