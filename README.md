@@ -8,10 +8,10 @@
 
 This is my entry for the [dev.to GitHub Actions hackathon](https://dev.to/devteam/announcing-the-github-actions-hackathon-on-dev-3ljn)
 
-## 📖 Índice
+## Index
 
 - [issuetron-3000 🚨](#issuetron-3000-)
-  - [📖 Índice](#-índice)
+  - [Index](#index)
   - [About this](#about-this)
   - [How to use](#how-to-use)
   - [Setting up Adafruit IO](#setting-up-adafruit-io)
