@@ -6012,7 +6012,7 @@ defineProperty(
 const core = __webpack_require__(186);
 const github = __webpack_require__(438);
 const MQTT = __webpack_require__(923);
-
+const fs = __webpack_require__(747);
 // GitHub Action inputs
 const io_user = core.getInput('io_user');
 const io_key = core.getInput('io_key');
@@ -6020,7 +6020,7 @@ const blink = core.getInput('blink');
 const time = core.getInput('time');
 
 // Required env vars
-const required_vars = ['io_user', 'io_key', 'GITHUB_EVENT_PATH'];
+/*const required_vars = ['io_user', 'io_key', 'GITHUB_EVENT_PATH'];
 
 required_vars.forEach((env) => {
   if (!process.env[env] || !process.env[env].length) {
@@ -6029,11 +6029,14 @@ required_vars.forEach((env) => {
     );
     process.exit(1);
   }
-});
+});*/
 
 const eventContent = fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8');
+const eventObj = JSON.parse(eventContent);
 
-console.log(eventContent);
+console.log(`Title: ${eventObj.issue.title}`);
+console.log(`User: ${eventObj.issue.user.login}`);
+
 /*const topic = `mxarc/feeds/issuetron/json`;
 
 (async () => {
