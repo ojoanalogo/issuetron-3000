@@ -10,34 +10,34 @@
 */
 
 // Add required imports
-const core = require('@actions/core');
-const github = require('@actions/github');
-const MQTT = require('async-mqtt');
-const fs = require('fs');
+import core from '@actions/core';
+import MQTT from 'async-mqtt';
+import fs from 'fs';
 
 // GitHub Action inputs
 const io_user = core.getInput('io_user').trim();
 const io_key = core.getInput('io_key').trim();
 const io_feed = core.getInput('io_feed').trim();
 const send_context = core.getInput('send_context') || true;
-const blink = core.getInput('blink') || true;
-const time = core.getInput('time') || 10;
+const blink: boolean = Boolean(core.getInput('blink')) || true;
+const time: number = parseInt(core.getInput('time')) || 10;
 const event_path = process.env.GITHUB_EVENT_PATH;
 
 // Required env vars
-const required_vars = [event_path, io_user, io_key, io_feed];
+const required_vars: Array<string> = [event_path, io_user, io_key, io_feed];
 required_vars.forEach((val) => {
   if (!val || !val.length) {
-    core.error(`Env var ${env} is not defined. Please check workflow inputs`);
+    core.error(`Env var ${val} is not defined. Please check workflow inputs`);
     process.exit(1);
   }
 });
 
-const eventContent = fs.readFileSync(event_path, 'utf8');
-const eventObj = JSON.parse(eventContent);
+const eventContent: string = fs.readFileSync(event_path, 'utf8');
+const eventObj: GitHubEvent.RootObject = JSON.parse(eventContent);
 
-const isValidJson = (val) =>
-  val instanceof Array || val instanceof Object ? true : false;
+const isValidJson = (val: any) => {
+  return val instanceof Array || val instanceof Object ? true : false;
+};
 
 if (!isValidJson(eventObj)) {
   core.error('GitHub event path is not a valid JSON object');
@@ -53,12 +53,15 @@ if (!fs.existsSync(event_path)) {
 
 // let the show begin
 (async () => {
-  // here we create a MQTT connect to connect over Adafruit IO brooker
-  const client = await MQTT.connectAsync('mqtt://io.adafruit.com', {
-    port: 1883,
-    username: io_user,
-    password: io_key,
-  });
+  // here we create a MQTT client to connect over Adafruit IO brooker
+  const client: MQTT.AsyncClient = await MQTT.connectAsync(
+    'mqtt://io.adafruit.com',
+    {
+      port: 1883,
+      username: io_user,
+      password: io_key,
+    }
+  );
   try {
     const topic = `${io_user}/feeds/${io_feed}/json`;
     core.info('Sending call to IoT device...');
