@@ -26,11 +26,7 @@ required_vars.forEach((env) => {
 const eventContent = fs.readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8');
 const eventObj = JSON.parse(eventContent);
 
-console.log(`Title: ${eventObj.issue.title}`);
-console.log(`User: ${eventObj.issue.user.login}`);
-
 const topic = `mxarc/feeds/issuetron/json`;
-
 (async () => {
   const client = await MQTT.connectAsync('mqtt://io.adafruit.com', {
     port: 1883,
@@ -39,6 +35,8 @@ const topic = `mxarc/feeds/issuetron/json`;
   });
   try {
     core.info('Sending call to IoT device...');
+    core.info(`Title: ${eventObj.issue.title}`);
+    core.info(`User: ${eventObj.issue.user.login}`);
     await client.publish(
       topic,
       JSON.stringify({
