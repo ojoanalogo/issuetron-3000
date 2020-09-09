@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Checkout # Checkout local action
         uses: actions/checkout@v2
-        with:
-          path: '..'
       - name: Send activation to ESP8266 device
         uses: ./ # Uses an action in the root directory
         id: activation
