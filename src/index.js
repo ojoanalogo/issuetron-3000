@@ -86,7 +86,7 @@ if (!fs.existsSync(event_path)) {
   } catch (error) {
     // oops! something wrong must happened, please blame the developer of this action
     core.setOutput('success', 'false');
-    core.info(error.stack);
-    process.exit();
+    core.setFailed(error.message);
+    process.exit(1);
   }
 })();
