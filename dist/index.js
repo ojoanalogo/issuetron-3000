@@ -1401,11 +1401,12 @@ if (!fs_1.default.existsSync(event_path)) {
         core_1.default.info(`Title: ${eventObj.issue.title}`);
         core_1.default.info(`User: ${eventObj.issue.user.login}`);
         // now let's make a call to save the world
-        yield client.publish(topic, JSON.stringify(Object.assign({ blink,
+        const payload = Object.assign({ blink,
             time }, (send_context && {
             title: eventObj.issue.title,
             user: eventObj.issue.user.login,
-        }))));
+        }));
+        yield client.publish(topic, JSON.stringify(payload));
         // now let's finish the client connection
         yield client.end();
         core_1.default.info('Message sent!');
