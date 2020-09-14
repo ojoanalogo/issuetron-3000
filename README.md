@@ -44,8 +44,8 @@ jobs:
         uses: 'mxarc/issuetron-3000@1.0'
         id: activation
         with:
-          time: '15'
-          blink: true
+          time: '15' # how much time we will keep our light on
+          blink: true # enable blinking, otherwise just turn on the lamp
           io_user: '${{ secrets.IO_USER }}'
           io_key: '${{ secrets.IO_KEY }}'
           io_feed: 'issuetron'
@@ -57,7 +57,9 @@ jobs:
 
 ## Setting up Adafruit IO
 
-TODO
+1. Head over to https://io.adafruit.com/ and create an account (Click Get started for free)
+2. Once you create an account, sign in on io.adafruit.com
+3. third
 
 ## Setting up your IoT device
 

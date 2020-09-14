@@ -17,12 +17,17 @@ const github = require('@actions/github');
 const MQTT = require('async-mqtt');
 const fs = require('fs');
 
+const getInputBoolean = (inputName) => {
+  const value = core.getInput(inputName);
+  return /^\s*(true|1)\s*$/i.test(value);
+};
+
 // GitHub Action inputs
 const io_user = core.getInput('io_user').trim();
 const io_key = core.getInput('io_key').trim();
 const io_feed = core.getInput('io_feed').trim();
-const send_context = core.getInput('send_context') || true;
-const blink: boolean = Boolean(core.getInput('blink')) || true;
+const send_context: boolean = getInputBoolean('send_context');
+const blink: boolean = getInputBoolean('blink');
 const time: number = parseInt(core.getInput('time')) || 10;
 const event_path = process.env.GITHUB_EVENT_PATH;
 
