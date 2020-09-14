@@ -13,6 +13,7 @@
 import core from '@actions/core';
 import MQTT from 'async-mqtt';
 import fs from 'fs';
+import { Payload } from './payload.interface';
 
 // GitHub Action inputs
 const io_user = core.getInput('io_user').trim();
@@ -69,18 +70,18 @@ if (!fs.existsSync(event_path)) {
     core.info(`Title: ${eventObj.issue.title}`);
     core.info(`User: ${eventObj.issue.user.login}`);
     // now let's make a call to save the world
-    await client.publish(
-      topic,
-      JSON.stringify({
-        blink,
-        time,
-        // conditionally expand object to include issue context if it's desired
-        ...(send_context && {
-          title: eventObj.issue.title,
-          user: eventObj.issue.user.login,
-        }),
-      })
-    );
+
+    const payload: Payload = {
+      blink,
+      time,
+      // conditionally expand object to include issue context if it's desired
+      ...(send_context && {
+        title: eventObj.issue.title,
+        user: eventObj.issue.user.login,
+      }),
+    };
+
+    await client.publish(topic, JSON.stringify(payload));
     // now let's finish the client connection
     await client.end();
     core.info('Message sent!');

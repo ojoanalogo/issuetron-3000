@@ -1,6 +1,7 @@
 #include <ESP8266WiFi.h>
 #include "Adafruit_MQTT.h"
 #include "Adafruit_MQTT_Client.h"
+#include <ArduinoJson.h>
 
 // the led output pin
 #define LED 5
@@ -76,6 +77,23 @@ void loop()
     {
       Serial.print(F("Got Issuetron call: "));
       Serial.println((char *)issuetron.lastread);
+
+      // https://arduinojson.org/v6/assistant/
+      const size_t capacity = JSON_OBJECT_SIZE(4) + 50;
+      DynamicJsonDocument doc(capacity);
+      // put lastread info into JSON string
+      const char *json = (char *)issuetron.lastread;
+
+      // call ArduinoJSON library
+      deserializeJson(doc, json);
+
+      // now we have access to the json keys and values
+
+      bool blink = doc["blink"];        // true
+      int time = doc["time"];           // 15
+      const char *title = doc["title"]; // "Hello world 5.0"
+      const char *user = doc["user"];   // "mxarc"
+
       // Do the blink thingy
       for (int i = 0; i < 5; i++)
       {
