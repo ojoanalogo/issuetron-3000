@@ -9,11 +9,13 @@
 * author: @mxarc
 */
 
-// Add required imports
-import core from '@actions/core';
-import MQTT from 'async-mqtt';
-import fs from 'fs';
 import { Payload } from './payload.interface';
+
+// Add required imports
+const core = require('@actions/core');
+const github = require('@actions/github');
+const MQTT = require('async-mqtt');
+const fs = require('fs');
 
 // GitHub Action inputs
 const io_user = core.getInput('io_user').trim();
@@ -55,14 +57,11 @@ if (!fs.existsSync(event_path)) {
 // let the show begin
 (async () => {
   // here we create a MQTT client to connect over Adafruit IO brooker
-  const client: MQTT.AsyncClient = await MQTT.connectAsync(
-    'mqtt://io.adafruit.com',
-    {
-      port: 1883,
-      username: io_user,
-      password: io_key,
-    }
-  );
+  const client = await MQTT.connectAsync('mqtt://io.adafruit.com', {
+    port: 1883,
+    username: io_user,
+    password: io_key,
+  });
   try {
     const topic = `${io_user}/feeds/${io_feed}/json`;
     core.info('Sending call to IoT device...');
