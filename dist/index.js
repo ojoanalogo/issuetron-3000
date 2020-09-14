@@ -2714,6 +2714,7 @@ if (!fs.existsSync(event_path)) {
         // now let's make a call to save the world
         const payload = Object.assign({ blink,
             time }, (send_context && {
+            repo: eventObj.repository.name,
             title: eventObj.issue.title,
             user: eventObj.issue.user.login,
         }));

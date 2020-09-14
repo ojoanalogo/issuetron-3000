@@ -5,18 +5,15 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
-// the led output pin
-#define LED 5
-
 // WiFi Settings
-#define WLAN_SSID "..."
-#define WLAN_PASS "hello123"
+#define WLAN_SSID "DogeFi"
+#define WLAN_PASS "comodorops3"
 
 // Adafruit settings
 #define AIO_SERVER "io.adafruit.com"
 #define AIO_SERVERPORT 1883 // use 8883 for SSL
-#define AIO_USERNAME "<your_username>"
-#define AIO_KEY "<password>"
+#define AIO_USERNAME "mxarc"
+#define AIO_KEY "7ac391b03ae24f24acdd28164d28434d"
 
 // set the LCD number of columns and rows
 int lcdColumns = 16;
@@ -46,8 +43,8 @@ void setup()
 {
   Serial.begin(9600);
   delay(10);
-  pinMode(D1, OUTPUT);
-  digitalWrite(D1, LOW);
+  pinMode(D3, OUTPUT);
+  digitalWrite(D3, LOW);
   lcd.init(); // initialize the lcd
   lcd.backlight();
   lcd.setCursor(0, 0);
@@ -104,7 +101,8 @@ void loop()
       lcd.clear();
       lcd.print("Issue opened!");
       // https://arduinojson.org/v6/assistant/
-      const size_t capacity = JSON_OBJECT_SIZE(4) + 50;
+      const size_t capacity = JSON_OBJECT_SIZE(5) + 140;
+      // example json: {"blink":false,"time":15,"title":"No blink test #2","user":"mxarc", "repo": "issuetron-3000"}
       DynamicJsonDocument doc(capacity);
       // put lastread info into JSON string
       const char *json = (char *)issuetron.lastread;
@@ -115,12 +113,20 @@ void loop()
       int time = doc["time"];           // 15
       const char *title = doc["title"]; // "Hello world 5.0"
       const char *user = doc["user"];   // "mxarc"
+      const char *repo = doc["repo"];   // "issuetron-3000"
       if (title)
       {
         delay(1000);
         lcd.clear();
-        lcd.print("u:" + *user);
-        lcd.print("t:" + *title);
+        lcd.print(user);
+        lcd.setCursor(0, 1);
+        lcd.print(title);
+      }
+      else
+      {
+        lcd.print("Beep! Boop!");
+        lcd.setCursor(0, 1);
+        lcd.print("New issue");
       }
       // check time not less than one
       if (time < 1)
@@ -133,12 +139,19 @@ void loop()
         for (int i = 0; i < time; i++)
         {
           delay(120);
-          digitalWrite(D1, HIGH);
+          digitalWrite(D3, HIGH);
           delay(1000);
-          digitalWrite(D1, LOW);
+          digitalWrite(D3, LOW);
         }
       }
-      delay(1500);
+      else
+      {
+        digitalWrite(D3, HIGH);
+        delay(time * 1000);
+        digitalWrite(D3, LOW);
+      }
+      lcd.clear();
+      lcd.setCursor(0, 0);
       lcd.print("Listening...");
     }
   }

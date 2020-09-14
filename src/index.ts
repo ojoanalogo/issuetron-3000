@@ -80,6 +80,7 @@ if (!fs.existsSync(event_path)) {
       time,
       // conditionally expand object to include issue context if it's desired
       ...(send_context && {
+        repo: eventObj.repository.name,
         title: eventObj.issue.title,
         user: eventObj.issue.user.login,
       }),
