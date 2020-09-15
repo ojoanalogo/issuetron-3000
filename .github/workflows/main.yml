@@ -22,7 +22,7 @@ jobs:
         id: activation
         with:
           time: '15'
-          blink: false
+          blink: true
           io_user: '${{ secrets.IO_USER }}'
           io_key: '${{ secrets.IO_KEY }}'
           io_feed: 'issuetron'

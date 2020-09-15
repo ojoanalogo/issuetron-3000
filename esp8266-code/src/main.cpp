@@ -87,7 +87,7 @@ void loop()
       lcd.setCursor(0, 0);
       lcd.clear();
       lcd.print("Issue opened!");
-      lcd.autoscroll();
+      delay(400);
       // https://arduinojson.org/v6/assistant/
       const size_t capacity = JSON_OBJECT_SIZE(5) + 140;
       // example json: {"blink":false,"time":15,"title":"No blink test #2","user":"mxarc", "repo": "issuetron-3000"}
@@ -102,18 +102,24 @@ void loop()
       const char *title = doc["title"]; // "Hello world 5.0"
       const char *user = doc["user"];   // "mxarc"
       const char *repo = doc["repo"];   // "issuetron-3000"
+      if (repo)
+      {
+        lcd.clear();
+        lcd.print(repo);
+        delay(2000);
+        lcd.clear();
+        lcd.noAutoscroll();
+      }
       if (title)
       {
-        delay(1000);
-        lcd.clear();
+        lcd.setCursor(0, 0);
         lcd.print(user);
-        lcd.autoscroll();
         lcd.setCursor(0, 1);
         lcd.print(title);
-        lcd.autoscroll();
       }
       else
       {
+        lcd.clear();
         lcd.print("Beep! Boop!");
         lcd.setCursor(0, 1);
         lcd.print("New issue");
