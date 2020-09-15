@@ -4,20 +4,7 @@
 #include <ArduinoJson.h>
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-
-// WiFi Settings
-#define WLAN_SSID "DogeFi"
-#define WLAN_PASS "comodorops3"
-
-// Adafruit settings
-#define AIO_SERVER "io.adafruit.com"
-#define AIO_SERVERPORT 1883 // use 8883 for SSL
-#define AIO_USERNAME "mxarc"
-#define AIO_KEY "7ac391b03ae24f24acdd28164d28434d"
-
-// set the LCD number of columns and rows
-int lcdColumns = 16;
-int lcdRows = 2;
+#include <config.h>
 
 // Create an ESP8266 WiFiClient class to connect to the MQTT server.
 WiFiClient client;
@@ -33,7 +20,7 @@ Adafruit_MQTT_Client mqtt(&client, AIO_SERVER, AIO_SERVERPORT, AIO_USERNAME, AIO
 Adafruit_MQTT_Subscribe issuetron = Adafruit_MQTT_Subscribe(&mqtt, AIO_USERNAME "/feeds/issuetron");
 
 // LCD declaration
-LiquidCrystal_I2C lcd(0x27, lcdColumns, lcdRows);
+LiquidCrystal_I2C lcd(0x27, LCD_COLS, LCD_ROWS);
 
 // Bug workaround for Arduino 1.6.6, it seems to need a function declaration
 // for some reason (only affects ESP8266, likely an arduino-builder bug).
@@ -100,6 +87,7 @@ void loop()
       lcd.setCursor(0, 0);
       lcd.clear();
       lcd.print("Issue opened!");
+      lcd.autoscroll();
       // https://arduinojson.org/v6/assistant/
       const size_t capacity = JSON_OBJECT_SIZE(5) + 140;
       // example json: {"blink":false,"time":15,"title":"No blink test #2","user":"mxarc", "repo": "issuetron-3000"}
@@ -119,8 +107,10 @@ void loop()
         delay(1000);
         lcd.clear();
         lcd.print(user);
+        lcd.autoscroll();
         lcd.setCursor(0, 1);
         lcd.print(title);
+        lcd.autoscroll();
       }
       else
       {
